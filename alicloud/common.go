@@ -544,8 +544,8 @@ func writeToFile(filePath string, data interface{}) error {
 		}
 	}
 
-	if _, err := os.Stat(filePath); os.IsNotExist(err) {
-		os.MkdirAll(filePath, 0600)
+	if _, err := os.Stat(filepath.Dir(filePath)); os.IsNotExist(err) {
+		os.MkdirAll(filepath.Dir(filePath), 0622)
 	}
 
 	if _, err := os.Stat(filePath); err == nil {
@@ -554,7 +554,7 @@ func writeToFile(filePath string, data interface{}) error {
 		}
 	}
 
-	return ioutil.WriteFile(filePath, []byte(out), 422)
+	return ioutil.WriteFile(filePath, []byte(out), 622)
 }
 
 type Invoker struct {
